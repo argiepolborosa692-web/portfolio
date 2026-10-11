@@ -1,0 +1,351 @@
+
+
+:root{
+  --primary:#8b5cf6;
+  --primary-dark:#5b21b6;
+  --secondary:#06b6d4;
+  --accent:#f59e0b;
+  --text:#e6eef8;
+  --text-muted:#94a3b8;
+  --dark:#060006;
+  --glass:rgba(255,255,255,.06);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+
+body{
+  font-family:'Space Grotesk','Inter',system-ui,-apple-system,sans-serif;
+  color:var(--text);
+  background:var(--dark);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--primary),var(--secondary));
+  border-radius:10px;border:2px solid var(--dark);
+}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--secondary),var(--accent))}
+
+/* ---------- Glass ---------- */
+.glass{
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.4),
+             inset 0 1px 0 rgba(255,255,255,.1),
+             0 0 0 1px rgba(255,255,255,.05);
+  transition:border-color .3s ease, box-shadow .3s ease;
+}
+.glass:hover{
+  border-color:rgba(255,255,255,.2);
+  box-shadow:0 25px 50px rgba(0,0,0,.5),
+             inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* ---------- Gradient button ---------- */
+.btn-gradient{
+  background:linear-gradient(135deg,var(--primary),var(--secondary),var(--accent));
+  background-size:200% 200%;
+  animation:gradient 8s ease infinite;
+  box-shadow:0 8px 24px rgba(139,92,246,.28);
+  color:#fff;
+}
+.btn-gradient:hover{box-shadow:0 14px 34px rgba(139,92,246,.45)}
+
+/* ---------- Skill bars ---------- */
+.skill-bar{
+  height:8px;border-radius:9999px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.skill-progress{
+  height:100%;width:0;border-radius:9999px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  transition:width 1.2s cubic-bezier(.22,1,.36,1);
+}
+
+/* ---------- Particles container ---------- */
+.particles-container{
+  position:fixed;inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ---------- Gradient text ---------- */
+.gradient-text{
+  background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:300% 300%;
+  animation:gradient 8s ease infinite;
+}
+.shiny-text{
+  background:linear-gradient(90deg,var(--primary) 0%,var(--secondary) 25%,var(--accent) 50%,var(--secondary) 75%,var(--primary) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:text-shimmer 3s linear infinite;
+}
+
+/* ---------- 3D cards ---------- */
+.card-3d{transform-style:preserve-3d;perspective:1000px}
+.card-3d-inner{
+  transition:transform .6s cubic-bezier(.23,1,.32,1);
+  transform-style:preserve-3d;
+}
+.card-3d:hover .card-3d-inner{transform:rotateY(10deg) rotateX(6deg) translateZ(24px)}
+
+/* ---------- Holographic sheen ---------- */
+.holographic{position:relative;overflow:hidden}
+.holographic::before{
+  content:'';position:absolute;top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%);
+  animation:spin 10s linear infinite;
+  pointer-events:none;
+}
+
+/* ---------- Morphing background blobs ---------- */
+.morph-bg{animation:morph 15s ease-in-out infinite;filter:blur(60px);opacity:.18}
+
+/* ---------- Glitch text ---------- */
+.glitch-text{position:relative}
+.glitch-text::before,
+.glitch-text::after{
+  content:attr(data-text);position:absolute;top:0;left:0;
+  width:100%;height:100%;pointer-events:none;
+}
+.glitch-text::before{animation:glitch .3s infinite;color:var(--primary);z-index:-1}
+.glitch-text::after{animation:glitch .3s infinite reverse;color:var(--secondary);z-index:-2}
+@keyframes glitch{
+  0%,100%{transform:translate(0)}
+  20%{transform:translate(-2px,2px)}
+  40%{transform:translate(-2px,-2px)}
+  60%{transform:translate(2px,2px)}
+  80%{transform:translate(2px,-2px)}
+}
+
+/* ---------- Animated gradient border ---------- */
+.gradient-border-animated{
+  position:relative;
+  border:double 2px transparent;
+  background-image:linear-gradient(var(--dark),var(--dark)),
+                   linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
+  background-origin:border-box;
+  background-clip:padding-box,border-box;
+  animation:borderGlow 3s ease-in-out infinite;
+}
+
+/* ---------- Framework grid ---------- */
+.framework-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+  gap:16px;
+}
+.framework-icon{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px 12px;border-radius:16px;
+  background:rgba(255,255,255,.03);
+  transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
+  position:relative;overflow:hidden;
+}
+.framework-icon::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
+  transition:left .6s;
+}
+.framework-icon:hover::before{left:100%}
+.framework-icon:hover{
+  transform:translateY(-5px) scale(1.05);
+  background:rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(139,92,246,.2);
+}
+
+/* ---------- Neon ---------- */
+.neon{
+  text-shadow:0 0 5px var(--primary),0 0 10px var(--primary);
+  animation:neonFlicker 1.5s ease-in-out infinite;
+}
+
+/* ---------- Matrix rain ---------- */
+.matrix-rain{
+  position:fixed;inset:0;
+  pointer-events:none;z-index:-2;opacity:.08;
+  overflow:hidden;
+}
+.matrix-char{
+  position:absolute;color:#0f0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:14px;
+  animation:matrix-fall linear forwards;
+}
+@keyframes matrix-fall{
+  0%{transform:translateY(-10vh);opacity:1}
+  100%{transform:translateY(110vh);opacity:0}
+}
+
+/* ---------- Interactive button ripple ---------- */
+.btn-interactive{
+  position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform .3s ease, box-shadow .3s ease, background-color .3s ease;
+}
+.btn-interactive::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:0;height:0;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  transform:translate(-50%,-50%);
+  transition:width .6s ease,height .6s ease;
+  pointer-events:none;
+}
+.btn-interactive:hover::before{width:300px;height:300px}
+
+.magnetic-btn{transition:transform .3s ease}
+.magnetic-btn:hover{transform:scale(1.06)}
+
+/* ---------- Touch targets ---------- */
+.btn-interactive,
+.magnetic-btn,
+.btn-gradient,
+a.nav-link,
+button{min-width:44px;min-height:44px}
+
+/* ---------- Focus ---------- */
+:focus{outline:none}
+:focus-visible{
+  outline:3px solid #a78bfa;
+  outline-offset:2px;
+  border-radius:8px;
+}
+
+/* ---------- Typing cursor ---------- */
+.typing-cursor{
+  display:inline-block;width:3px;height:1.1em;
+  background-color:var(--primary);
+  margin-left:4px;vertical-align:-2px;
+  animation:blink 1s steps(1) infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ---------- Color cycle ---------- */
+.color-cycle{animation:colorCycle 5s linear infinite}
+@keyframes colorCycle{
+  0%{color:var(--primary)}
+  33%{color:var(--secondary)}
+  66%{color:var(--accent)}
+  100%{color:var(--primary)}
+}
+
+/* ---------- Hover lift ---------- */
+.hover-lift{transition:transform .3s ease, box-shadow .3s ease}
+.hover-lift:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(139,92,246,.3);
+}
+
+/* ---------- Back to top ---------- */
+#backToTop{
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease, visibility .3s ease, transform .3s ease, box-shadow .3s ease;
+  transform:translateY(12px);
+}
+#backToTop.is-visible{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);
+}
+
+/* ---------- Skip link ---------- */
+.skip-link{
+  position:absolute;left:16px;top:-100px;z-index:200;
+  padding:12px 20px;border-radius:0 0 12px 12px;
+  background:var(--primary);color:#fff;font-weight:600;
+  transition:top .2s ease;
+}
+.skip-link:focus{top:0}
+
+/* ---------- Custom cursor (fine pointers only) ---------- */
+.cursor-dot,.cursor-ring{display:none}
+@media (hover:hover) and (pointer:fine){
+  body{cursor:none}
+  a,button,input,textarea,.framework-icon{cursor:none}
+  .cursor-dot{
+    display:block;position:fixed;top:0;left:0;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--primary);pointer-events:none;z-index:9998;
+    transform:translate(-50%,-50%);
+    will-change:transform;
+  }
+  .cursor-ring{
+    display:block;position:fixed;top:0;left:0;
+    width:34px;height:34px;border-radius:50%;
+    border:2px solid var(--secondary);
+    pointer-events:none;z-index:9997;
+    transform:translate(-50%,-50%);
+    transition:width .25s ease,height .25s ease,border-color .25s ease;
+    will-change:transform;
+  }
+  .cursor-ring.is-hover{width:52px;height:52px;border-color:var(--primary)}
+}
+
+/* ---------- Global keyframes used by Tailwind classes ---------- */
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+@keyframes gradient{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+@keyframes text-shimmer{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+@keyframes borderGlow{
+  0%,100%{border-color:rgba(139,92,246,.5)}
+  50%{border-color:rgba(6,182,212,.85)}
+}
+@keyframes neonFlicker{
+  0%,100%{opacity:1;filter:drop-shadow(0 0 5px #8b5cf6)}
+  50%{opacity:.85;filter:drop-shadow(0 0 18px #06b6d4)}
+}
+@keyframes morph{
+  0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}
+  50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}
+}
+@keyframes pulse-glow{
+  0%,100%{opacity:1;box-shadow:0 0 20px rgba(139,92,246,.5)}
+  50%{opacity:.8;box-shadow:0 0 40px rgba(139,92,246,.8)}
+}
+@keyframes fadeInUp{
+  0%{transform:translateY(30px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .matrix-rain,#particles-js,#three-bg,
+  .cursor-dot,.cursor-ring,.morph-bg{display:none !important}
+  .skill-progress{transition:none !important}
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width:768px){
+  .glass{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .framework-grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:12px}
+  .framework-icon{padding:16px 8px}
+  .glitch-text::before,.glitch-text::after{display:none}
+}

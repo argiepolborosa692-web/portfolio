@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Argie Polborosa — Front-End Developer &amp; IT Student</title>
+  <meta name="description" content="Argie Polborosa — Front-End Developer and IT student building fast, accessible, animated web experiences with React, Vue, Next.js and Three.js. Available for internships." />
+  <meta name="theme-color" content="#060006" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Argie Polborosa — Front-End Developer & IT Student" />
+  <meta property="og:description" content="Front-End Developer building fast, accessible, animated web experiences." />
+  <meta property="og:image" content="./download.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tailwind.config.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Icons / animation libs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Local styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <noscript>
+    <style>
+      [data-aos]{opacity:1 !important;transform:none !important}
+      .skill-progress{width:var(--w,0) !important}
+      #backToTop{display:none}
+    </style>
+  </noscript>
+</head>
+
+<body class="bg-dark-900 text-gray-200">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Scroll progress -->
+  <div id="scrollProgress"
+       class="fixed top-0 left-0 h-1 w-0 bg-gradient-to-r from-primary-500 via-secondary to-accent z-[60] pointer-events-none"
+       aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Matrix rain -->
+  <div class="matrix-rain" aria-hidden="true"></div>
+
+  <!-- Particles -->
+  <div id="particles-js" class="particles-container" aria-hidden="true"></div>
+
+  <!-- Three.js background -->
+  <canvas id="three-bg" class="fixed inset-0 z-[-1] pointer-events-none" aria-hidden="true"></canvas>
+
+  <!-- Ambient blobs -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-2]" aria-hidden="true">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full morph-bg"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full morph-bg" style="animation-delay:-5s"></div>
+    <div class="absolute top-3/4 left-1/2 w-64 h-64 bg-accent/10 rounded-full morph-bg" style="animation-delay:-9s"></div>
+  </div>
+
+  <!-- ================= NAV ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8">
+    <nav class="glass max-w-6xl mx-auto rounded-2xl px-6 py-3 flex items-center justify-between" aria-label="Main">
+      <a href="#home" class="flex items-center space-x-3 magnetic-btn">
+        <div>
+          <span class="block font-bold text-lg bg-gradient-to-r from-primary-400 to-secondary bg-clip-text text-transparent">
+            Argie Polborosa
+          </span>
+          <span class="block text-xs text-gray-400 neon">Front-End Developer</span>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center space-x-1">
+        <a href="#home"     class="nav-link px-4 py-2 text-sm font-medium hover:text-primary-300 transition-colors btn-interactive">Home</a>
+        <a href="#about"    class="nav-link px-4 py-2 text-sm font-medium hover:text-primary-300 transition-colors btn-interactive">About</a>
+        <a href="#skills"   class="nav-link px-4 py-2 text-sm font-medium hover:text-primary-300 transition-colors btn-interactive">Skills</a>
+        <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium hover:text-primary-300 transition-colors btn-interactive">Projects</a>
+        <a href="#contact"
+           class="ml-4 px-6 py-2 btn-gradient rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/30 btn-interactive magnetic-btn">
+          Contact Me
+        </a>
+      </div>
+
+      <button id="mobileMenuButton"
+              type="button"
+              class="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors btn-interactive"
+              aria-label="Toggle navigation menu"
+              aria-controls="mobileMenu"
+              aria-expanded="false">
+        <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div id="mobileMenu" class="md:hidden glass mt-2 rounded-2xl p-4 hidden">
+      <div class="flex flex-col space-y-1">
+        <a href="#home"     class="nav-link px-4 py-3 rounded-lg hover:bg-white/5 transition-colors btn-interactive">Home</a>
+        <a href="#about"    class="nav-link px-4 py-3 rounded-lg hover:bg-white/5 transition-colors btn-interactive">About</a>
+        <a href="#skills"   class="nav-link px-4 py-3 rounded-lg hover:bg-white/5 transition-colors btn-interactive">Skills</a>
+        <a href="#projects" class="nav-link px-4 py-3 rounded-lg hover:bg-white/5 transition-colors btn-interactive">Projects</a>
+        <a href="#contact"
+           class="mt-2 px-6 py-3 btn-gradient rounded-lg font-semibold text-center btn-interactive">
+          Contact Me
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="min-h-screen pt-32 pb-24 px-4 md:px-8 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Left -->
+        <div data-aos="fade-right">
+          <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-6 gradient-border-animated">
+            <span class="w-2 h-2 bg-primary-500 rounded-full animate-ping" aria-hidden="true"></span>
+            <span class="text-sm font-medium color-cycle">Available for Internships</span>
+          </div>
+
+          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span class="block">Hi, I'm</span>
+            <span class="gradient-text glitch-text" data-text="Argie Polborosa">Argie Polborosa</span>
+          </h1>
+
+          <p class="text-2xl md:text-3xl font-semibold mb-6">
+            <span class="text-gray-400">I'm a </span>
+            <span id="typing-text" class="shiny-text" aria-live="polite"></span>
+            <span class="typing-cursor" aria-hidden="true"></span>
+          </p>
+
+          <p class="text-gray-400 text-lg mb-8 max-w-xl">
+            I create beautiful, responsive web experiences with modern technologies.
+            Passionate about learning and building digital solutions that make an impact.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#projects"
+               class="px-8 py-3 btn-gradient rounded-full font-semibold hover:shadow-xl hover:shadow-primary-500/30 transform hover:-translate-y-1 btn-interactive magnetic-btn">
+              <i class="fas fa-rocket mr-2" aria-hidden="true"></i>View My Work
+            </a>
+            <a href="#contact"
+               class="px-8 py-3 border-2 border-primary-500/30 rounded-full font-semibold hover:bg-primary-500/10 transition-all group btn-interactive">
+              <span class="group-hover:text-primary-300">Contact Me</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="mt-12">
+            <p class="text-gray-400 mb-4 text-sm uppercase tracking-wider">Tech Stack</p>
+            <div class="flex flex-wrap gap-3">
+              <span class="px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-400 text-sm border border-primary-500/20 hover:scale-110 transition-transform">React</span>
+              <span class="px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-400 text-sm border border-primary-500/20 hover:scale-110 transition-transform">Vue.js</span>
+              <span class="px-3 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm border border-secondary/20 hover:scale-110 transition-transform">Next.js</span>
+              <span class="px-3 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm border border-secondary/20 hover:scale-110 transition-transform">Nuxt.js</span>
+              <span class="px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-sm border border-amber-500/20 hover:scale-110 transition-transform">Svelte</span>
+              <span class="px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-400 text-sm border border-primary-500/20 hover:scale-110 transition-transform">TypeScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: avatar -->
+        <div data-aos="fade-left" class="relative">
+          <div class="relative mx-auto max-w-md">
+
+            <div class="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto mb-8">
+              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500 to-secondary flex items-center justify-center text-6xl font-bold text-white select-none">
+                AP
+              </div>
+              <img src="./download.jpeg"
+                   alt="Portrait of Argie Polborosa"
+                   width="256" height="256"
+                   loading="eager"
+                   decoding="async"
+                   class="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-dark-900 animate-morph"
+                   onerror="this.style.display='none'">
+              <div class="absolute -inset-2 rounded-full border-2 border-primary-500/40 animate-pulse-glow pointer-events-none" aria-hidden="true"></div>
+            </div>
+
+            <div class="hidden lg:block absolute top-0 -left-16 animate-float-2" aria-hidden="true">
+              <div class="glass p-4 rounded-2xl w-48 holographic">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
+                    <i class="fab fa-react text-primary-400 text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-sm">React.js</div>
+                    <div class="text-xs text-gray-400">Advanced</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden lg:block absolute bottom-0 -right-16 animate-float-3" aria-hidden="true">
+              <div class="glass p-4 rounded-2xl w-48 holographic">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center">
+                    <i class="fab fa-vuejs text-secondary text-xl"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-sm">Vue.js</div>
+                    <div class="text-xs text-gray-400">Advanced</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2">
+      <a href="#about" class="flex flex-col items-center space-y-2 group btn-interactive" aria-label="Scroll to About section">
+        <span class="text-sm text-gray-400 group-hover:text-primary-400 transition-colors">Explore More</span>
+        <span class="w-8 h-12 flex items-center justify-center border-2 border-gray-600 rounded-full group-hover:border-primary-400 transition-colors">
+          <span class="w-1.5 h-3 bg-primary-400 rounded-full animate-bounce"></span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="py-20 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div data-aos="fade-right" class="glass p-8 md:p-10 rounded-3xl">
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-5">
+          <i class="fas fa-user-astronaut text-primary-400" aria-hidden="true"></i>
+          <span class="text-sm font-medium">About Me</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Turning ideas into <span class="gradient-text">interfaces</span>
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-4">
+          I'm an IT student and front-end developer focused on building accessible,
+          performant, and delightfully animated web applications. I care about clean
+          component architecture, sensible state management, and interfaces that feel
+          fast on any device.
+        </p>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Right now I'm deepening my skills in 3D on the web (WebGL / Three.js),
+          design systems, and testing — and I'm actively looking for an internship
+          where I can contribute to a real product team.
+        </p>
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div class="p-4 rounded-2xl bg-white/5">
+            <div class="text-2xl font-bold gradient-text">3+</div>
+            <div class="text-xs text-gray-400 mt-1">Years coding</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5">
+            <div class="text-2xl font-bold gradient-text">15+</div>
+            <div class="text-xs text-gray-400 mt-1">Projects built</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5">
+            <div class="text-2xl font-bold gradient-text">10+</div>
+            <div class="text-xs text-gray-400 mt-1">Technologies</div>
+          </div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" class="glass p-8 md:p-10 rounded-3xl">
+        <h3 class="text-2xl font-bold mb-6 shiny-text">What I bring</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-primary-400 mt-1" aria-hidden="true"></i>
+            <span class="text-gray-300"><strong class="text-white">Responsive-first</strong> — every layout tested from 320px up.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-secondary mt-1" aria-hidden="true"></i>
+            <span class="text-gray-300"><strong class="text-white">Accessible by default</strong> — keyboard nav, focus states, reduced-motion support.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-amber-400 mt-1" aria-hidden="true"></i>
+            <span class="text-gray-300"><strong class="text-white">Performance aware</strong> — lazy loading, GPU-friendly animation, small bundles.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-primary-400 mt-1" aria-hidden="true"></i>
+            <span class="text-gray-300"><strong class="text-white">Design-literate</strong> — comfortable in Figma, fluent in design tokens.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FRAMEWORKS ================= -->
+  <section class="py-16 px-4 md:px-8 bg-gradient-to-b from-dark-900/60 to-dark-800/40">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl font-bold mb-3 gradient-text">Frameworks &amp; Libraries I Work With</h3>
+        <p class="text-gray-400">Modern tools for modern web development</p>
+      </div>
+
+      <div class="framework-grid">
+        <div class="framework-icon"><i class="fab fa-react text-4xl text-[#61DAFB] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">React</span><span class="text-xs text-gray-400 mt-1">Frontend</span></div>
+        <div class="framework-icon"><i class="fab fa-vuejs text-4xl text-[#4FC08D] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Vue.js</span><span class="text-xs text-gray-400 mt-1">Frontend</span></div>
+        <div class="framework-icon"><i class="fab fa-angular text-4xl text-[#DD0031] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Angular</span><span class="text-xs text-gray-400 mt-1">Framework</span></div>
+        <div class="framework-icon"><i class="fab fa-svelte text-4xl text-[#FF3E00] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Svelte</span><span class="text-xs text-gray-400 mt-1">Compiler</span></div>
+
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/nextdotjs/ffffff" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">Next.js</span><span class="text-xs text-gray-400 mt-1">React Framework</span>
+        </div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/nuxtdotjs/00DC82" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">Nuxt.js</span><span class="text-xs text-gray-400 mt-1">Vue Framework</span>
+        </div>
+        <div class="framework-icon"><i class="fab fa-gatsby text-4xl text-[#663399] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Gatsby</span><span class="text-xs text-gray-400 mt-1">Static Site</span></div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/remix/ffffff" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">Remix</span><span class="text-xs text-gray-400 mt-1">Full Stack</span>
+        </div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/astro/BC52EE" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">Astro</span><span class="text-xs text-gray-400 mt-1">Static Site</span>
+        </div>
+
+        <div class="framework-icon"><i class="fab fa-node-js text-4xl text-[#5FA04E] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Node.js</span><span class="text-xs text-gray-400 mt-1">Backend</span></div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/express/ffffff" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">Express.js</span><span class="text-xs text-gray-400 mt-1">Backend</span>
+        </div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/mongodb/47A248" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">MongoDB</span><span class="text-xs text-gray-400 mt-1">Database</span>
+        </div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/graphql/E10098" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">GraphQL</span><span class="text-xs text-gray-400 mt-1">API Query</span>
+        </div>
+        <div class="framework-icon">
+          <img src="https://cdn.simpleicons.org/typescript/3178C6" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 mb-2" alt="">
+          <span class="text-sm font-medium">TypeScript</span><span class="text-xs text-gray-400 mt-1">Typed JS</span>
+        </div>
+        <div class="framework-icon"><i class="fab fa-docker text-4xl text-[#2496ED] mb-2" aria-hidden="true"></i><span class="text-sm font-medium">Docker</span><span class="text-xs text-gray-400 mt-1">Container</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills" class="py-20 px-4 md:px-8 relative">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-4 gradient-border-animated">
+          <i class="fas fa-cogs text-primary-400" aria-hidden="true"></i>
+          <span class="text-sm font-medium">Technical Expertise</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">My <span class="gradient-text">Skills</span></h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Mastering modern web technologies and frameworks</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div data-aos="fade-up" data-aos-delay="100" class="glass p-8 rounded-3xl hover-lift card-3d">
+          <div class="card-3d-inner">
+            <div class="w-14 h-14 rounded-2xl bg-primary-500/20 flex items-center justify-center mb-6">
+              <i class="fas fa-code text-2xl text-primary-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-6 shiny-text">Frontend Development</h3>
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">React &amp; Vue.js</span><span class="text-primary-400">88%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">TypeScript</span><span class="text-primary-400">82%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="82%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">Next.js / Nuxt.js</span><span class="text-primary-400">85%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="200" class="glass p-8 rounded-3xl hover-lift card-3d">
+          <div class="card-3d-inner">
+            <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center mb-6">
+              <i class="fas fa-server text-2xl text-secondary" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-6 shiny-text">Backend &amp; Database</h3>
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">Node.js / Express</span><span class="text-secondary">78%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="78%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">MongoDB</span><span class="text-secondary">75%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2 text-sm"><span class="font-medium">GraphQL / REST</span><span class="text-secondary">80%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="300" class="glass p-8 rounded-3xl hover-lift card-3d">
+          <div class="card-3d-inner">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center mb-6">
+              <i class="fas fa-tools text-2xl text-amber-400" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-6 shiny-text">DevOps &amp; Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">Docker</span>
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">Git &amp; GitHub</span>
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">AWS / Vercel</span>
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">CI/CD</span>
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">Vite / Webpack</span>
+              <span class="px-3 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-sm">Jest / Cypress</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-8">
+        <div class="glass p-8 rounded-3xl">
+          <h3 class="text-2xl font-bold mb-6 gradient-text">Animation Expertise</h3>
+          <ul class="space-y-3">
+            <li class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+              <span class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center"><i class="fas fa-wand-magic-sparkles text-green-400" aria-hidden="true"></i></span>
+                <span class="font-medium">GSAP</span>
+              </span>
+              <span class="text-green-400 text-sm">Advanced</span>
+            </li>
+            <li class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+              <span class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center"><i class="fas fa-cube text-blue-400" aria-hidden="true"></i></span>
+                <span class="font-medium">Three.js</span>
+              </span>
+              <span class="text-blue-400 text-sm">Intermediate</span>
+            </li>
+            <li class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+              <span class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center"><i class="fas fa-film text-purple-400" aria-hidden="true"></i></span>
+                <span class="font-medium">Framer Motion</span>
+              </span>
+              <span class="text-purple-400 text-sm">Advanced</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass p-8 rounded-3xl">
+          <h3 class="text-2xl font-bold mb-6 gradient-text">Current Focus</h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2 text-sm"><span class="font-medium">WebGL &amp; 3D Graphics</span><span class="text-primary-400">70%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2 text-sm"><span class="font-medium">React Native</span><span class="text-secondary">65%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-width="65%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2 text-sm"><span class="font-medium">Cloud Architecture</span><span class="text-amber-400">60%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-width="60%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3D SHOWCASE ================= -->
+  <section class="py-20 px-4 md:px-8 bg-gradient-to-b from-dark-800 to-dark-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h3 class="text-3xl font-bold mb-4 gradient-text">Interactive 3D Showcase</h3>
+        <p class="text-gray-400">Experience modern web animations</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-6 rounded-3xl text-center hover-lift">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary-500 to-secondary flex items-center justify-center">
+            <i class="fas fa-cube text-2xl text-white" aria-hidden="true"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">3D Animations</h4>
+          <p class="text-gray-400 text-sm">Built with Three.js and WebGL</p>
+        </div>
+        <div class="glass p-6 rounded-3xl text-center hover-lift">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-secondary to-amber-500 flex items-center justify-center">
+            <i class="fas fa-hand-pointer text-2xl text-white" aria-hidden="true"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">Interactive Elements</h4>
+          <p class="text-gray-400 text-sm">Physics-based interactions</p>
+        </div>
+        <div class="glass p-6 rounded-3xl text-center hover-lift">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-amber-500 to-primary-500 flex items-center justify-center">
+            <i class="fas fa-vr-cardboard text-2xl text-white" aria-hidden="true"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-2">VR Ready</h4>
+          <p class="text-gray-400 text-sm">WebXR-compatible experiences</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects" class="py-20 px-4 md:px-8 bg-gradient-to-b from-dark-900 to-dark-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-4 gradient-border-animated">
+          <i class="fas fa-diagram-project text-primary-400" aria-hidden="true"></i>
+          <span class="text-sm font-medium">Featured Work</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">My <span class="gradient-text">Projects</span></h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Interactive web applications with modern animations</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectGallery"></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="py-20 px-4 md:px-8 relative">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-4 gradient-border-animated">
+          <i class="fas fa-envelope text-primary-400" aria-hidden="true"></i>
+          <span class="text-sm font-medium">Get In Touch</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's <span class="gradient-text">Connect</span></h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+          I'm currently seeking internship opportunities and would love to collaborate.
+        </p>
+      </div>
+
+      <div class="glass rounded-3xl p-8 md:p-12" data-aos="fade-up" data-aos-delay="200">
+        <div class="grid md:grid-cols-2 gap-12">
+
+          <div>
+            <h3 class="text-2xl font-bold mb-8 shiny-text">Contact Information</h3>
+
+            <div class="space-y-4">
+              <a href="mailto:argiepolborosa692@gmail.com"
+                 class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all group magnetic-btn">
+                <span class="w-12 h-12 rounded-xl bg-primary-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i class="fas fa-envelope text-primary-400" aria-hidden="true"></i>
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm text-gray-400">Email</span>
+                  <span class="block font-semibold truncate">argiepolborosa692@gmail.com</span>
+                </span>
+              </a>
+
+              <a href="https://github.com/argiepolborosa" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all group magnetic-btn">
+                <span class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i class="fab fa-github text-secondary" aria-hidden="true"></i>
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm text-gray-400">GitHub</span>
+                  <span class="block font-semibold truncate">github.com/argiepolborosa</span>
+                </span>
+              </a>
+
+              <a href="https://linkedin.com/in/argie-polborosa" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all group magnetic-btn">
+                <span class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i class="fab fa-linkedin text-amber-400" aria-hidden="true"></i>
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm text-gray-400">LinkedIn</span>
+                  <span class="block font-semibold truncate">linkedin.com/in/argie-polborosa</span>
+                </span>
+              </a>
+            </div>
+
+            <div class="mt-8 p-6 rounded-2xl bg-gradient-to-r from-primary-500/10 to-secondary/10 border border-primary-500/20">
+              <h4 class="font-bold mb-3 flex items-center">
+                <i class="fas fa-bolt text-amber-400 mr-2" aria-hidden="true"></i>Availability
+              </h4>
+              <p class="text-sm text-gray-400">
+                Currently available for internships and part-time opportunities.
+                Open to both remote and on-site positions.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <!--
+              NOTE: This form does not post anywhere yet.
+              To make it live, either:
+                • add an action="https://formspree.io/f/XXXX" method="POST" attribute, or
+                • call EmailJS / your own API inside handleSubmit() in script.js.
+            -->
+            <form id="contactForm" class="space-y-6" novalidate>
+              <div>
+                <label for="name" class="block text-sm font-medium mb-2">Name</label>
+                <input type="text" id="name" name="name" required autocomplete="name"
+                       class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary-500 focus:outline-none transition-colors">
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email"
+                       class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary-500 focus:outline-none transition-colors">
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                <textarea id="message" name="message" rows="5" required
+                          class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-primary-500 focus:outline-none transition-colors resize-none"></textarea>
+              </div>
+
+              <button type="submit" data-confetti
+                      class="w-full px-8 py-4 btn-gradient rounded-xl font-semibold hover:shadow-xl hover:shadow-primary-500/30 transform hover:-translate-y-1 btn-interactive">
+                <span class="flex items-center justify-center">
+                  Send Message
+                  <i class="fas fa-paper-plane ml-2" aria-hidden="true"></i>
+                </span>
+              </button>
+            </form>
+
+            <div id="formMessage" role="status" aria-live="polite"
+                 class="mt-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hidden">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-check-circle text-green-400" aria-hidden="true"></i>
+                <p class="text-green-400 text-sm">Message sent successfully! I'll get back to you soon.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-12 px-4 md:px-8 border-t border-white/10 bg-dark-900/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary flex items-center justify-center">
+            <span class="font-bold text-white text-sm">AP</span>
+          </div>
+          <div>
+            <div class="font-bold text-lg gradient-text">Argie Polborosa</div>
+            <div class="text-sm text-gray-400">Front-End Developer &amp; IT Student</div>
+          </div>
+        </div>
+
+        <div class="flex space-x-4">
+          <a href="https://github.com/argiepolborosa" target="_blank" rel="noopener noreferrer"
+             aria-label="GitHub profile"
+             class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary-500/20 hover:text-primary-400 transition-all magnetic-btn">
+            <i class="fab fa-github text-xl" aria-hidden="true"></i>
+          </a>
+          <a href="https://linkedin.com/in/argie-polborosa" target="_blank" rel="noopener noreferrer"
+             aria-label="LinkedIn profile"
+             class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-all magnetic-btn">
+            <i class="fab fa-linkedin text-xl" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:argiepolborosa@gmail.com"
+             aria-label="Send an email"
+             class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500/20 hover:text-red-400 transition-all magnetic-btn">
+            <i class="fas fa-envelope text-xl" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-white/10 text-center text-gray-400 text-sm">
+        <p>© <span id="year">2026</span> Argie Polborosa. All rights reserved.</p>
+        <p class="mt-2 flex flex-wrap items-center justify-center gap-x-2">
+          <span>Built with</span>
+          <i class="fas fa-heart text-red-400 animate-pulse" aria-hidden="true"></i>
+          <span>using</span>
+          <span class="text-primary-400">Tailwind CSS</span><span>•</span>
+          <span class="text-secondary">Three.js</span><span>•</span>
+          <span class="text-amber-400">GSAP</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" type="button" aria-label="Back to top"
+          class="fixed bottom-8 right-8 w-14 h-14 rounded-full btn-gradient shadow-lg magnetic-btn z-40">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ================= LIBS ================= -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+  <!-- Local script -->
+  <script src="script.js"></script>
+</body>
+</html>
